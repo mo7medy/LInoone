@@ -1,7 +1,12 @@
 import React from 'react';
 import { ArrowRightIcon } from './icons/Icons';
+import { Page } from '../App';
 
-const TutorBusiness: React.FC = () => {
+interface TutorBusinessProps {
+    navigateTo: (page: Page) => void;
+}
+
+const TutorBusiness: React.FC<TutorBusinessProps> = ({ navigateTo }) => {
   return (
     <div className="py-16 md:py-24">
       <div className="grid lg:grid-cols-2 gap-8 items-stretch">
@@ -15,9 +20,12 @@ const TutorBusiness: React.FC = () => {
             <li>Get paid securely</li>
           </ul>
           <div className="mt-auto">
-            <a href="#" className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-teal-600 bg-white hover:bg-gray-100">
+            <button
+              onClick={() => navigateTo('become-tutor')}
+              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-teal-600 bg-white hover:bg-gray-100"
+            >
               Become a tutor <ArrowRightIcon className="w-5 h-5 ml-2" />
-            </a>
+            </button>
           </div>
         </div>
 

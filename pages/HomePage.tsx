@@ -30,10 +30,10 @@ const HomePage: React.FC<HomePageProps> = ({ navigateTo }) => {
         </div>
         <GuaranteeBanner />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <TutorBusiness />
+            <TutorBusiness navigateTo={navigateTo} />
         </div>
       </main>
-      <Footer />
+      <Footer navigateTo={navigateTo} />
     </>
   );
 };

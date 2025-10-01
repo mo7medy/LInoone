@@ -1,5 +1,7 @@
 {
   "name": "Linoone",
   "description": "An online platform to connect with the best language tutors from around the world. Learn faster, progress further, and achieve fluency with personalized one-on-one lessons.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [
+    "microphone"
+  ]
 }

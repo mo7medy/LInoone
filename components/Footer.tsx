@@ -1,58 +1,70 @@
 import React from 'react';
 import { FacebookIcon, InstagramIcon, YoutubeIcon, LinkedinIcon, TiktokIcon } from './icons/Icons';
+import { Page } from '../App';
 
-interface FooterLink {
-  title: string;
-  links: { text: string; href: string }[];
+interface FooterLinkItem {
+  text: string;
+  href?: string;
+  action?: () => void;
 }
 
-const footerLinks: FooterLink[] = [
-  {
-    title: 'About Us',
-    links: [
-      { text: 'Who we are', href: '#' },
-      { text: 'How it works', href: '#' },
-      { text: 'Careers', href: '#' },
-      { text: 'Media kit', href: '#' },
-    ],
-  },
-  {
-    title: 'For Students',
-    links: [
-      { text: 'Linoone Blog', href: '#' },
-      { text: 'Questions and Answers', href: '#' },
-      { text: 'Student discount', href: '#' },
-      { text: 'Refer a friend', href: '#' },
-    ],
-  },
-  {
-    title: 'For Tutors',
-    links: [
-      { text: 'Become an online tutor', href: '#' },
-      { text: 'Teach English online', href: '#' },
-      { text: 'Teach French online', href: '#' },
-      { text: 'See all online tutoring jobs', href: '#' },
-    ],
-  },
-  {
-    title: 'For Companies',
-    links: [
-      { text: 'Corporate language training', href: '#' },
-      { text: 'Corporate training blog', href: '#' },
-      { text: 'Resource center', href: '#' },
-    ],
-  },
-];
+interface FooterLinkSection {
+  title: string;
+  links: FooterLinkItem[];
+}
 
-const socialLinks = [
-  { Icon: FacebookIcon, href: '#', name: 'Facebook' },
-  { Icon: InstagramIcon, href: '#', name: 'Instagram' },
-  { Icon: YoutubeIcon, href: '#', name: 'Youtube' },
-  { Icon: LinkedinIcon, href: '#', name: 'LinkedIn' },
-  { Icon: TiktokIcon, href: '#', name: 'TikTok' },
-]
+interface FooterProps {
+    navigateTo: (page: Page) => void;
+}
 
-const Footer: React.FC = () => {
+const Footer: React.FC<FooterProps> = ({ navigateTo }) => {
+
+    const footerLinks: FooterLinkSection[] = [
+      {
+        title: 'About Us',
+        links: [
+          { text: 'Who we are', href: '#' },
+          { text: 'How it works', href: '#' },
+          { text: 'Careers', href: '#' },
+          { text: 'Media kit', href: '#' },
+        ],
+      },
+      {
+        title: 'For Students',
+        links: [
+          { text: 'Linoone Blog', href: '#' },
+          { text: 'Questions and Answers', href: '#' },
+          { text: 'Student discount', href: '#' },
+          { text: 'Refer a friend', href: '#' },
+        ],
+      },
+      {
+        title: 'For Tutors',
+        links: [
+          { text: 'Become an online tutor', action: () => navigateTo('become-tutor') },
+          { text: 'Teach English online', href: '#' },
+          { text: 'Teach French online', href: '#' },
+          { text: 'See all online tutoring jobs', href: '#' },
+        ],
+      },
+      {
+        title: 'For Companies',
+        links: [
+          { text: 'Corporate language training', href: '#' },
+          { text: 'Corporate training blog', href: '#' },
+          { text: 'Resource center', href: '#' },
+        ],
+      },
+    ];
+
+    const socialLinks = [
+      { Icon: FacebookIcon, href: '#', name: 'Facebook' },
+      { Icon: InstagramIcon, href: '#', name: 'Instagram' },
+      { Icon: YoutubeIcon, href: '#', name: 'Youtube' },
+      { Icon: LinkedinIcon, href: '#', name: 'LinkedIn' },
+      { Icon: TiktokIcon, href: '#', name: 'TikTok' },
+    ]
+
   return (
     <footer className="bg-gray-900 text-gray-400">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
@@ -63,9 +75,15 @@ const Footer: React.FC = () => {
               <ul className="mt-4 space-y-3">
                 {section.links.map((link) => (
                   <li key={link.text}>
-                    <a href={link.href} className="text-base text-gray-400 hover:text-white">
-                      {link.text}
-                    </a>
+                    {link.action ? (
+                       <button onClick={link.action} className="text-base text-left text-gray-400 hover:text-white">
+                        {link.text}
+                       </button>
+                    ) : (
+                       <a href={link.href} className="text-base text-gray-400 hover:text-white">
+                        {link.text}
+                       </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -102,6 +120,7 @@ const Footer: React.FC = () => {
              <a href="#" className="text-sm text-gray-500 hover:text-gray-300">Legal Center</a>
              <a href="#" className="text-sm text-gray-500 hover:text-gray-300">Privacy Policy</a>
              <a href="#" className="text-sm text-gray-500 hover:text-gray-300">Cookie Policy</a>
+             <button onClick={() => navigateTo('admin-dashboard')} className="text-sm text-gray-500 hover:text-gray-300">Admin</button>
            </div>
         </div>
       </div>

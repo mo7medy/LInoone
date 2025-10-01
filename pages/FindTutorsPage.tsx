@@ -22,7 +22,7 @@ const FindTutorsPage: React.FC<FindTutorsPageProps> = ({ navigateTo }) => {
         <Pagination />
         <FaqSection />
       </main>
-      <Footer />
+      <Footer navigateTo={navigateTo} />
     </>
   );
 };
